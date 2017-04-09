@@ -1,0 +1,13 @@
+{{diagnostic}}
+<div class="container">
+    <h1>Hero Form</h1>
+    <form (submit)="onSubmit()" [formGroup]="formulaire">
+      
+      <select-reactive [optionsList]="dataList2" [selectedOption]="selectValue2"
+        property="libelle" [formControl]="formulaire.controls['selectInput2']" ngDefaultControl></select-reactive>
+      <select-reactive [optionsList]="dataList" [selectedOption]="selectValue"
+        property="libelle" [formControl]="formulaire.controls['selectInput']" ngDefaultControl></select-reactive>
+
+      <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>

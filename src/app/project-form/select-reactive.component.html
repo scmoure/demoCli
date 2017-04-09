@@ -1,0 +1,7 @@
+        
+<div class="form-group">
+    <label for="select">Select</label>
+        <select name="selectList" [formControl]="formControl" >
+            <option *ngFor="let option of optionsList" [ngValue]="option">{{option[property]}}</option>
+        </select>
+</div>  

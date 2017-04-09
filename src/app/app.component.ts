@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Session } from './models/session.model';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
+  session : Session = new Session('session test');
+
+  getSession() : Session {
+    return this.session;
+  }
+
+  event(data: string) {
+    alert(`data : ${data}`);
+  }
 }
