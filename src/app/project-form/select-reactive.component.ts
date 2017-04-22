@@ -14,14 +14,22 @@ export class SelectReactive implements OnInit {
 
   ngOnInit() {
     this.formControl.valueChanges.subscribe(
-      (value : IComparable) => this.selectedOption = value
+      (value : IComparable) => {    
+//        this.selectedOption = this.optionsList.filter((option : IComparable) => {
+//          return option.equals(value);
+//        })[0];    
+      }
     );
-
     this.selectedOption = this.optionsList.filter((item : IComparable) => {
       return item.equals(this.selectedOption);
     })[0];    
     this.formControl.setValue(this.selectedOption);
+    
+     
+  }
 
+  onChange(select:any) {
+    console.log(select);
   }
 
 }

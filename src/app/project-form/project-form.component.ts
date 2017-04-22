@@ -22,6 +22,8 @@ export class ProjectFormComponent implements OnInit {
   private formulaire: FormGroup;
   private selectInput: AbstractControl;
   private idDossierSocial: number;
+  private mode: string;
+  public modeAjouter: boolean;
 
   constructor(
     fb: FormBuilder,
@@ -50,10 +52,35 @@ export class ProjectFormComponent implements OnInit {
           this.idDossierSocial = +params['idDossierSocial'];
         }, 2000);
       })
-    this.route.parent.url.subscribe((segments : UrlSegment[]) => console.log(segments[0].path));
+    this.route.parent.url.subscribe((segments : UrlSegment[]) => {
+      this.mode = segments[0].path;
+      switch (this.mode) {
+        case 'ajouter':
+          this.modeAjouter = true;
+          console.log('añadir');
+            setTimeout(() => {
+             let newValue: Referentiel = new Referentiel(6, 'R6', 'Referentiel 6');
+             this.formulaire.controls['selectInput2'].setValue(this.dataList2.filter((option : Referentiel) => {               
+               return option.equals(newValue);
+             })[0]);
+          }, 2000);
+          this.formulaire.controls['selectInput2'].disable();
+          break;
+        case 'create':
+          console.log('crear');
+          break;
+        case 'modifier':
+          console.log('modificar');
+          break;
+      }
+    })
   }
 
   onSubmit() {
+              this.formulaire.value.selectInput2 = this.dataList2.filter((option : Referentiel) => {
+              return option.code === 'R6';
+            })[0];
+
     console.log(this.formulaire.value);
   }
 }
