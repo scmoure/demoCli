@@ -4,9 +4,11 @@ import { Referentiel } from '../models/referentiel.model';
 import { IComparable } from '../models/i.comparable.model';
 import { FormBuilder, FormGroup, AbstractControl} from '@angular/forms';
 import {Observable} from 'rxjs/Rx';
+import { Router, ActivatedRoute, Params, UrlSegment } from '@angular/router';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
-  selector: 'app-project-form',
+  selector: 'project-form',
   templateUrl: './project-form.component.html',
   styleUrls: ['./project-form.component.css']
 })
@@ -19,8 +21,13 @@ export class ProjectFormComponent implements OnInit {
   private selectValue2: Referentiel = new Referentiel(7, 'R7', 'Referentiel 7');
   private formulaire: FormGroup;
   private selectInput: AbstractControl;
+  private idDossierSocial: number;
 
-  constructor(fb: FormBuilder) {
+  constructor(
+    fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router
+    ) {
     this.formulaire = fb.group({
       'selectInput' : [this.selectValue],
       'selectInput2' : [this.selectValue2]
@@ -35,7 +42,15 @@ export class ProjectFormComponent implements OnInit {
       this.dataList.push(referentiel);
       this.dataList2.push(referentiel2);
     }
-
+    this.route.params
+    // (+) converts string 'id' to a number
+    .subscribe((params: Params) => 
+      {
+        setTimeout(() => {
+          this.idDossierSocial = +params['idDossierSocial'];
+        }, 2000);
+      })
+    this.route.parent.url.subscribe((segments : UrlSegment[]) => console.log(segments[0].path));
   }
 
   onSubmit() {
