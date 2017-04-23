@@ -60,9 +60,10 @@ export class ProjectFormComponent implements OnInit {
           console.log('añadir');
             setTimeout(() => {
              let newValue: Referentiel = new Referentiel(6, 'R6', 'Referentiel 6');
-             this.formulaire.controls['selectInput2'].setValue(this.dataList2.filter((option : Referentiel) => {               
-               return option.equals(newValue);
-             })[0]);
+           //  this.formulaire.controls['selectInput2'].setValue(this.dataList2.filter((option : Referentiel) => {               
+             //  return option.equals(newValue);
+             //})[0]);
+             this.formulaire.controls['selectInput2'].setValue(newValue);
           }, 2000);
           this.formulaire.controls['selectInput2'].disable();
           break;
