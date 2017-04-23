@@ -25,8 +25,6 @@ export class SelectReactive implements OnInit {
       return item.equals(this.selectedOption);
     })[0];    
     this.formControl.setValue(this.selectedOption);
-    
-     
   }
 
   onChange(select:any) {

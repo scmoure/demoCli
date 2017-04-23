@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { TrainingDetailComponent } from './training-detail/training-detail.component';
-import { ProjectFormComponent } from './project-form/project-form.component';
+import { AjouterFormComponent } from './project-form/ajouter-form.component';
 import { SelectReactive } from './project-form/select-reactive.component';
 import { LeftMenuComponent } from './sidebar/sidebar.component';
 
@@ -26,7 +26,7 @@ const appRoutes: Routes = [
   {
     path: 'ajouter/:idDossierSocial',
     children: [
-      { path: '', component: ProjectFormComponent },
+      { path: '', component: AjouterFormComponent },
       { path: '', component: LeftMenuComponent, outlet: 'left-menu' }
     ]
   },
@@ -39,7 +39,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     TrainingDetailComponent,
-    ProjectFormComponent,
+    AjouterFormComponent,
     SelectReactive,
     LeftMenuComponent
   ],

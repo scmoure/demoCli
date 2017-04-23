@@ -12,18 +12,20 @@ import 'rxjs/add/operator/switchMap';
   templateUrl: './project-form.component.html',
   styleUrls: ['./project-form.component.css']
 })
-export class ProjectFormComponent implements OnInit {
+export abstract class ProjectFormComponent implements OnInit {
 
-  private dataList = new Array<Referentiel>();
-  private dataList2 = new Array<Referentiel>();
+  protected dataList = new Array<Referentiel>();
+  protected dataList2 = new Array<Referentiel>();
 
   private selectValue: Referentiel = new Referentiel(2, 'R2', 'Referentiel 2');
   private selectValue2: Referentiel = new Referentiel(7, 'R7', 'Referentiel 7');
-  private formulaire: FormGroup;
+  protected formulaire: FormGroup;
   private selectInput: AbstractControl;
   private idDossierSocial: number;
   private mode: string;
   public modeAjouter: boolean;
+
+  protected CODE : string;
 
   constructor(
     fb: FormBuilder,
@@ -77,11 +79,11 @@ export class ProjectFormComponent implements OnInit {
     })
   }
 
-  onSubmit() {
-              this.formulaire.value.selectInput2 = this.dataList2.filter((option : Referentiel) => {
-              return option.code === 'R6';
-            })[0];
+  onSubmit() : void {
+      this.formulaire.value.selectInput2 = this.dataList2.filter((option : Referentiel) => {
+          return option.code === this.CODE;
+      })[0];
 
-    console.log(this.formulaire.value);
+      console.log(this.formulaire.value);
   }
 }
