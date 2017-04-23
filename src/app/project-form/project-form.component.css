@@ -3,7 +3,9 @@
 }
 
 .main {
+  position: static;
   width:80%;
-  background-color:white;
+  min-height: 100%;
+  background-color:lightyellow;
   float:right;
 }

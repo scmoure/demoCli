@@ -1,5 +1,8 @@
 .leftmenu {
+    position: absolute;
+    height: 100%;
     width:20%;
-    background-color:lightgray;
+    background-color:lightyellow;
     float:left;
+    display:block;
 }
