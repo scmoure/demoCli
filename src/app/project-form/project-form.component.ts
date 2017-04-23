@@ -19,6 +19,7 @@ export abstract class ProjectFormComponent implements OnInit {
 
   private selectValue: Referentiel = new Referentiel(2, 'R2', 'Referentiel 2');
   private selectValue2: Referentiel = new Referentiel(7, 'R7', 'Referentiel 7');
+  protected defaultValue: Referentiel = new Referentiel(0, '', '');
   protected formulaire: FormGroup;
   private selectInput: AbstractControl;
   private idDossierSocial: number;
@@ -45,45 +46,28 @@ export abstract class ProjectFormComponent implements OnInit {
       let referentiel2: Referentiel = new Referentiel(i+5, `R${i+5}`, `Referentiel ${i+5}`);
       this.dataList.push(referentiel);
       this.dataList2.push(referentiel2);
+      this.selectDefaultOption();
     }
+    this.formulaire.controls['selectInput2'].disable();
     this.route.params
     // (+) converts string 'id' to a number
     .subscribe((params: Params) => 
-      {
-        setTimeout(() => {
-          this.idDossierSocial = +params['idDossierSocial'];
-        }, 2000);
-      })
-    this.route.parent.url.subscribe((segments : UrlSegment[]) => {
-      this.mode = segments[0].path;
-      switch (this.mode) {
-        case 'ajouter':
-          this.modeAjouter = true;
-          console.log('añadir');
-            setTimeout(() => {
-             let newValue: Referentiel = new Referentiel(6, 'R6', 'Referentiel 6');
-           //  this.formulaire.controls['selectInput2'].setValue(this.dataList2.filter((option : Referentiel) => {               
-             //  return option.equals(newValue);
-             //})[0]);
-             this.formulaire.controls['selectInput2'].setValue(newValue);
-          }, 2000);
-          this.formulaire.controls['selectInput2'].disable();
-          break;
-        case 'create':
-          console.log('crear');
-          break;
-        case 'modifier':
-          console.log('modificar');
-          break;
-      }
-    })
+          this.idDossierSocial = +params['idDossierSocial']
+    );
   }
 
   onSubmit() : void {
+      // Since select is disabled, we need to force form value to have a value for the select
       this.formulaire.value.selectInput2 = this.dataList2.filter((option : Referentiel) => {
           return option.code === this.CODE;
       })[0];
 
       console.log(this.formulaire.value);
+  }
+
+  selectDefaultOption() : void {
+    this.defaultValue = this.dataList2.filter((option : Referentiel) => {
+         return option.code === this.CODE;
+      })[0];
   }
 }

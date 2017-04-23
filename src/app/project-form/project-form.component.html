@@ -3,7 +3,7 @@
     <h1>Hero Form</h1>
     <form (submit)="onSubmit()" [formGroup]="formulaire">
       
-      <select-reactive [optionsList]="dataList2" [selectedOption]="selectValue2"
+      <select-reactive [optionsList]="dataList2" [selectedOption]="defaultValue"
         property="libelle" [formControl]="formulaire.controls['selectInput2']" ngDefaultControl></select-reactive>
       <select-reactive [optionsList]="dataList" [selectedOption]="selectValue"
         property="libelle" [formControl]="formulaire.controls['selectInput']" ngDefaultControl></select-reactive>
