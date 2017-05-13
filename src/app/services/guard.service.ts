@@ -12,19 +12,24 @@ export class GuardService extends AuthGuardParentService {
     }
     
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-        return this.verifyAccess(super.canActivate(route, state));
+        return this.combinedAccess(super.canActivate(route, state));
     }
 
     canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-        return this.verifyAccess(super.canActivateChild(route, state));
+        return this.combinedAccess(super.canActivateChild(route, state));
     }
 
-    verifyAccess(precondition: Observable<boolean>): Observable<boolean> {
-        return precondition.merge(this.userService.getUser().map(user => {
+    combinedAccess(precondition: Observable<boolean>): Observable<boolean> {
+        return precondition.merge(this.customAccess()).every(access => access);
+    }
+
+    // Méthode à customizer
+    customAccess(): Observable<boolean> {
+        return this.userService.getUser().map(user => {
             if (!user.profile) {
                 this.router.navigate(['error']);
             }
             else return true;
-        })).every(access => access);
+        })
     }
 }
