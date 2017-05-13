@@ -11,6 +11,8 @@ import 'rxjs/add/operator/switchMap';
 export class LeftMenuComponent implements OnInit {
   public idDossierSocial : number;
 
+  private test : string;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router
@@ -25,6 +27,9 @@ export class LeftMenuComponent implements OnInit {
           this.idDossierSocial = +params['idDossierSocial'];
         }, 2000);
       })
+    setTimeout(() => {
+      this.test = "myTest";
+    }, 4000);
   }
 
 }
